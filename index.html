@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARM Training Portal</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0d3d2f;
+      color: #1d1d1f;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    body.password-bg {
+      background: url('cousin-island-view2.jpg') center/cover no-repeat fixed;
+      align-items: center;
+    }
+    body.training-bg {
+      background: url('cousin-island-view2.jpg') center/cover no-repeat fixed;
+      align-items: flex-start;
+    }
+
+    /* Password screen */
+    .password-screen {
+      text-align: center;
+      padding: 40px;
+      margin-top: -80px;
+    }
+    .password-screen .lock-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+    .password-screen h2 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: white;
+    }
+    .password-screen p {
+      color: rgba(255,255,255,0.75);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+    .password-input-wrapper {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+    }
+    .password-input-wrapper input {
+      padding: 12px 16px;
+      border: 1px solid #d2d2d7;
+      border-radius: 10px;
+      font-size: 16px;
+      width: 220px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .password-input-wrapper input:focus {
+      border-color: #1a6b3c;
+    }
+    .password-input-wrapper button {
+      padding: 12px 24px;
+      background: #1a6b3c;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .password-input-wrapper button:hover {
+      background: #145530;
+    }
+    .error-msg {
+      color: #ff6b6b;
+      font-size: 13px;
+      margin-top: 12px;
+      display: none;
+    }
+
+    /* Training screen */
+    .training-screen {
+      display: none;
+      width: 100%;
+      max-width: 700px;
+      padding: 60px 20px 40px 20px;
+    }
+    .app-header {
+      text-align: center;
+      margin-bottom: 48px;
+      margin-top: 60px !important;
+    }
+    .app-header h1 {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+      color: white;
+    }
+    .app-header h3 {
+      color: white;
+      font-weight: 400;
+    }
+    .app-header p {
+      color: rgba(255,255,255,0.8);
+      font-size: 16px;
+      margin-top: 12px;
+    }
+
+    /* Module sections */
+    .module-section {
+      max-width: 700px;
+      margin: 0 auto 20px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 14px;
+      padding: 24px 28px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border-left: 4px solid #1a6b3c;
+    }
+    .module-section h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: #1d1d1f;
+    }
+    .material-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 0;
+      border-top: 1px solid #f0f0f2;
+    }
+    .material-item:first-of-type {
+      border-top: none;
+    }
+    .material-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .material-icon {
+      font-size: 22px;
+    }
+    .material-title {
+      font-size: 14px;
+      color: #3a3a3c;
+    }
+    .admin-badge {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 2px 8px;
+      background: #fff3e0;
+      color: #e65100;
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 8px;
+      vertical-align: middle;
+    }
+    .view-btn {
+      display: inline-block;
+      padding: 6px 18px;
+      background: #1a6b3c;
+      color: white;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .view-btn:hover {
+      background: #145530;
+    }
+
+    /* Per-module accent colors, matching each module's page in the ARM app */
+    .module-turtles,
+    .module-illegal-fishing {
+      border-left-color: #24408E;
+    }
+    .module-turtles h4,
+    .module-illegal-fishing h4 {
+      color: #24408E;
+    }
+    .module-turtles .view-btn,
+    .module-illegal-fishing .view-btn {
+      background: #24408E;
+    }
+    .module-turtles .view-btn:hover,
+    .module-illegal-fishing .view-btn:hover {
+      background: #1F3679;
+    }
+
+    .module-beach-cleaning,
+    .module-beach-profiling {
+      border-left-color: #0086D1;
+    }
+    .module-beach-cleaning h4,
+    .module-beach-profiling h4 {
+      color: #0086D1;
+    }
+    .module-beach-cleaning .view-btn,
+    .module-beach-profiling .view-btn {
+      background: #0086D1;
+    }
+    .module-beach-cleaning .view-btn:hover,
+    .module-beach-profiling .view-btn:hover {
+      background: #0072B2;
+    }
+
+    .module-seabirds,
+    .module-smr {
+      border-left-color: #19BFD2;
+    }
+    .module-seabirds h4,
+    .module-smr h4 {
+      color: #15A2B2;
+    }
+    .module-seabirds .view-btn,
+    .module-smr .view-btn {
+      background: #19BFD2;
+    }
+    .module-seabirds .view-btn:hover,
+    .module-smr .view-btn:hover {
+      background: #15A2B2;
+    }
+
+    .module-tortoises,
+    .module-skink-census {
+      border-left-color: #1FBF9A;
+    }
+    .module-tortoises h4,
+    .module-skink-census h4 {
+      color: #1AA283;
+    }
+    .module-tortoises .view-btn,
+    .module-skink-census .view-btn {
+      background: #1FBF9A;
+    }
+    .module-tortoises .view-btn:hover,
+    .module-skink-census .view-btn:hover {
+      background: #1AA283;
+    }
+
+    .module-invasives,
+    .module-invertebrates {
+      border-left-color: #40AD48;
+    }
+    .module-invasives h4,
+    .module-invertebrates h4 {
+      color: #40AD48;
+    }
+    .module-invasives .view-btn,
+    .module-invertebrates .view-btn {
+      background: #40AD48;
+    }
+    .module-invasives .view-btn:hover,
+    .module-invertebrates .view-btn:hover {
+      background: #36933D;
+    }
+
+    .module-miscellaneous {
+      border-left-color: #0E7B41;
+    }
+    .module-miscellaneous h4 {
+      color: #0E7B41;
+    }
+    .module-miscellaneous .view-btn {
+      background: #0E7B41;
+    }
+    .module-miscellaneous .view-btn:hover {
+      background: #0C6937;
+    }
+
+    .module-admin {
+      border-left-color: #455a64;
+    }
+    .module-admin h4 {
+      color: #455a64;
+    }
+    .module-admin .view-btn {
+      background: #455a64;
+    }
+    .module-admin .view-btn:hover {
+      background: #3b4d55;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      color: rgba(255,255,255,0.6);
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Password Gate -->
+  <div id="passwordScreen" class="password-screen">
+    <img src="icon.png" alt="ARM Logo" style="width: 120px; height: auto; margin-bottom: 20px;">
+    <h2>ARM Training Portal</h2>
+    <p>Enter your password to access training materials</p>
+    <div class="password-input-wrapper">
+      <input type="password" id="passwordInput" placeholder="Password" onkeydown="if(event.key==='Enter')checkPassword()">
+      <button onclick="checkPassword()">Enter</button>
+    </div>
+    <p id="errorMsg" class="error-msg">Incorrect password. Please try again.</p>
+  </div>
+
+  <!-- Training Page -->
+  <div id="trainingScreen" class="training-screen">
+    <div class="app-header" style="margin-top: 60px !important;">
+      <img src="icon.png" alt="ARM Logo" style="width: 96px; height: auto; box-shadow: 0 4px 16px rgba(26, 107, 60, 0.3); border-radius: 20px;">
+      <h1>ARM Training Portal</h1>
+      <h3>App for Reserve Management Training</h3>
+      <p>Guides and videos for each part of the ARM app</p>
+    </div>
+
+    <!-- Turtles -->
+    <div class="module-section module-turtles">
+      <h4>🐢 Turtles</h4>
+      <div class="material-item">
+        <div class="material-info">
+          <span class="material-icon">📄</span>
+          <span class="material-title">Turtle Patrol Guide</span>
+        </div>
+        <a href="#" class="view-btn">View</a>
+      </div>
+      <div class="material-item">
+        <div class="material-info">
+          <span class="material-icon">🎬</span>
+          <span class="material-title">Turtle Patrol Walkthrough Video</span>
+        </div>
+        <a href="#" class="view-btn">View</a>
+      </div>
+    </div>
+
+    <!-- Illegal Fishing -->
+    <div class="module-section module-illegal-fishing">
+      <h4>🎣 Illegal Fishing</h4>
+      <div class="material-item">
+        <div class="material-info">
+          <span class="material-icon">📄</span>
+          <span class="material-title">Reporting Illegal Fishing Guide</span>
+        </div>
+        <a href="#" class="view-btn">View</a>
+      </div>
+      <div class="material-item">
+        <div class="material-info">
+          <span class="material-icon">🎬</span>
+          <span class="material-title">Illegal Fishing Walkthrough Video</span>
+        </div>
+        <a href="#" class="view-btn">View</a>
+      </div>
+    </div>
+
+    <!-- Beach Cleaning -->
+    <div class="module-section module-beach-cleaning">
+      <h4>🧹 Beach Cleaning</h4>
+      <div class="material-item">
+        <div class="material-info">
+          <span class="material-icon">📄</span>
+          <span class="material-title">Beach Cleaning Guide</span>
+        </div>
+        <a href="#" class="view-btn">View</a>
+      </div>
+      <div class="material-item">
+        <div class="material-info">
+          <span class="material-icon">🎬</span>
+          <span class="material-title">Beach Cleaning Walkthrough Video</span>
+        </div>
+        <a href="#" class="view-btn">View</a>
+      </div>
+    </div>
+
+    <!-- Beach Profiling -->
+    <div class="module-section module-beach-profiling">
+      <h4>🏖️ Beach Profiling</h4>
+      <div class="material-item">
+        <div class="material-info">
+          <span class="material-icon">📄</span>
+          <span class="material-title">Beach Profiling Guide</span>
+        </div>
+        <a href="#" class="view-btn">View</a>
+      </div>
+      <div class="material-item">
+        <div class="material-info">
+          <span class="material-icon">🎬</span>
+          <span class="material-title">Beach Profiling Walkthrough Video</span>
+        </div>
+        <a href="#" class="view-btn">View</a>
+      </div>
+    </div>
+
+    <!-- Seabirds -->
+    <div class="module-section module-seabirds">
+      <h4>🐦 Seabirds</h4>
+      <div class="material-item">
+        <div class="material-info">
+          <span class="material-icon">📄</span>
+          <span class="material-title">Seabird Census Guide</span>
+        </div>
+        <a href="#" class="view-btn">View</a>
+      </div>
+      <div class="material-item">
+        <div class="material-info">
+          <span class="material-icon">🎬</span>
+          <span class="material-title">Seabird Census Walkthrough Video</span>
+        </div>
+        <a href="#" class="view-btn">View</a>
+      </div>
+    </div>
+
+    <!-- S. Magpie Robins -->
+    <div class="module-section module-smr">
+      <h4>🐦‍⬛ S. Magpie Robins</h4>
+      <div class="material-item">
+        <div class="material-info">
+          <span class="material-icon">📄</span>
+          <span class="material-title">SMR Daily Monitoring Guide</span>
+        </div>
+        <a href="#" class="view-btn">View</a>
+      </div>
+      <div class="material-item">
+        <div class="material-info">
+          <span class="material-icon">🎬</span>
+          <span class="material-title">SMR Nest Walkthrough Video</span>
+        </div>
+        <a href="#" class="view-btn">View</a>
+      </div>
+    </div>
+
+    <!-- Tortoises -->
+    <div class="module-section module-tortoises">
+      <h4>🐢 Tortoises</h4>
+      <div class="material-item">
+        <div class="material-info">
+          <span class="material-icon">📄</span>
+          <span class="material-title">Tortoise Nest Guide</span>
+        </div>
+        <a href="#" class="view-btn">View</a>
+      </div>
+      <div class="material-item">
+        <div class="material-info">
+          <span class="material-icon">🎬</span>
+          <span class="material-title">Tortoise Census/Translocation/Excavation Video</span>
+        </div>
+        <a href="#" class="view-btn">View</a>
+      </div>
+    </div>
+
+    <!-- Skink/Gecko Census -->
+    <div class="module-section module-skink-census">
+      <h4>🦎 Skink/Gecko Census</h4>
+      <div class="material-item">
+        <div class="material-info">
+          <span class="material-icon">📄</span>
+          <span class="material-title">Skink/Gecko Census Guide</span>
+        </div>
+        <a href="#" class="view-btn">View</a>
+      </div>
+      <div class="material-item">
+        <div class="material-info">
+          <span class="material-icon">🎬</span>
+          <span class="material-title">Skink/Gecko Census Walkthrough Video</span>
+        </div>
+        <a href="#" class="view-btn">View</a>
+      </div>
+    </div>
+
+    <!-- Invasives -->
+    <div class="module-section module-invasives">
+      <h4>🌿 Invasives</h4>
+      <div class="material-item">
+        <div class="material-info">
+          <span class="material-icon">📄</span>
+          <span class="material-title">Invasive Species Guide</span>
+        </div>
+        <a href="#" class="view-btn">View</a>
+      </div>
+      <div class="material-item">
+        <div class="material-info">
+          <span class="material-icon">🎬</span>
+          <span class="material-title">Invasives Walkthrough Video</span>
+        </div>
+        <a href="#" class="view-btn">View</a>
+      </div>
+    </div>
+
+    <!-- Invertebrates -->
+    <div class="module-section module-invertebrates">
+      <h4>🐛 Invertebrates</h4>
+      <div class="material-item">
+        <div class="material-info">
+          <span class="material-icon">📄</span>
+          <span class="material-title">Invertebrates Census Guide</span>
+        </div>
+        <a href="#" class="view-btn">View</a>
+      </div>
+      <div class="material-item">
+        <div class="material-info">
+          <span class="material-icon">🎬</span>
+          <span class="material-title">Invertebrates Walkthrough Video</span>
+        </div>
+        <a href="#" class="view-btn">View</a>
+      </div>
+    </div>
+
+    <!-- Miscellaneous -->
+    <div class="module-section module-miscellaneous">
+      <h4>📦 Miscellaneous</h4>
+      <div class="material-item">
+        <div class="material-info">
+          <span class="material-icon">📄</span>
+          <span class="material-title">Miscellaneous Reports Guide</span>
+        </div>
+        <a href="#" class="view-btn">View</a>
+      </div>
+      <div class="material-item">
+        <div class="material-info">
+          <span class="material-icon">🎬</span>
+          <span class="material-title">Miscellaneous Walkthrough Video</span>
+        </div>
+        <a href="#" class="view-btn">View</a>
+      </div>
+    </div>
+
+    <!-- Admin (admin only module: stats, daily log, reporting -- tabs regular users can't access) -->
+    <div class="module-section module-admin" data-admin-only="true">
+      <h4>🔒 Admin <span class="admin-badge">Admin only</span></h4>
+      <div class="material-item">
+        <div class="material-info">
+          <span class="material-icon">📄</span>
+          <span class="material-title">Stats Pages Guide</span>
+        </div>
+        <a href="#" class="view-btn">View</a>
+      </div>
+      <div class="material-item">
+        <div class="material-info">
+          <span class="material-icon">📄</span>
+          <span class="material-title">Daily Log Guide</span>
+        </div>
+        <a href="#" class="view-btn">View</a>
+      </div>
+      <div class="material-item">
+        <div class="material-info">
+          <span class="material-icon">📄</span>
+          <span class="material-title">Reporting Tab Guide</span>
+        </div>
+        <a href="#" class="view-btn">View</a>
+      </div>
+    </div>
+    <!-- TODO: replace placeholder "#" links above with real PDF/video URLs as materials are produced. To add a new item, copy a .material-item block and paste it inside the relevant .module-section (add data-admin-only="true" to restrict it to admins). -->
+
+    <div class="footer">
+      <p>&copy; 2026 ARM / Nature Seychelles - Cousin Island Special Reserve. All rights reserved.</p>
+    </div>
+  </div>
+
+  <script>
+    // SHA-256 hashes of the two access passwords (L1 and Admin)
+    const HASH_L1 = 'placeholder_l1_hash';
+    const HASH_ADMIN = 'placeholder_admin_hash';
+
+    async function sha256(message) {
+      const msgBuffer = new TextEncoder().encode(message);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    // Generate the actual hashes on first load (for setup)
+    // Remove this after setting the passwords
+    (async () => {
+      window._HASH_L1 = await sha256('armfield');
+      window._HASH_ADMIN = await sha256('armadmin');
+      console.log('L1 password hash:', window._HASH_L1);
+      console.log('Admin password hash:', window._HASH_ADMIN);
+    })();
+
+    function applyRole(role) {
+      document.querySelectorAll('[data-admin-only]').forEach(el => {
+        el.style.display = (role === 'admin') ? '' : 'none';
+      });
+    }
+
+    async function checkPassword() {
+      const input = document.getElementById('passwordInput').value;
+      const hash = await sha256(input);
+      let role = null;
+      if (hash === (window._HASH_ADMIN || HASH_ADMIN)) {
+        role = 'admin';
+      } else if (hash === (window._HASH_L1 || HASH_L1)) {
+        role = 'l1';
+      }
+
+      if (role) {
+        sessionStorage.setItem('arm_training_role', role);
+        document.getElementById('passwordScreen').style.display = 'none';
+        document.getElementById('trainingScreen').style.display = 'block';
+        applyRole(role);
+        updateBackground();
+      } else {
+        document.getElementById('errorMsg').style.display = 'block';
+        document.getElementById('passwordInput').value = '';
+        document.getElementById('passwordInput').focus();
+      }
+    }
+
+    function updateBackground() {
+      if (document.getElementById('trainingScreen').style.display === 'block') {
+        document.body.className = 'training-bg';
+      } else {
+        document.body.className = 'password-bg';
+      }
+    }
+
+    // Keep session alive
+    const savedRole = sessionStorage.getItem('arm_training_role');
+    if (savedRole) {
+      document.getElementById('passwordScreen').style.display = 'none';
+      document.getElementById('trainingScreen').style.display = 'block';
+      applyRole(savedRole);
+    }
+    updateBackground();
+  </script>
+</body>
+</html>
