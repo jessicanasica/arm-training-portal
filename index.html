@@ -132,10 +132,18 @@
       align-items: center;
       gap: 8px;
     }
-    .module-section h4 img.module-icon {
+    .module-section h4 .module-icon {
+      display: inline-block;
       width: 20px;
       height: 20px;
       flex-shrink: 0;
+      background-color: currentColor;
+      -webkit-mask-size: contain;
+      mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
     }
     .material-item {
       display: flex;
@@ -469,7 +477,7 @@
 
     <!-- Turtles -->
     <div class="module-section module-turtles">
-      <h4><img class="module-icon" src="turtlefill.svg" alt=""> Turtles</h4>
+      <h4><span class="module-icon" style="-webkit-mask-image:url('turtlefill.svg');mask-image:url('turtlefill.svg');"></span> Turtles</h4>
       <!-- Documentation (commented out for now)
       <div class="material-item">
         <div class="material-info">
@@ -525,7 +533,7 @@
 
     <!-- Illegal Fishing -->
     <div class="module-section module-illegal-fishing">
-      <h4><img class="module-icon" src="no-fishing5.svg" alt=""> Illegal Fishing</h4>
+      <h4><span class="module-icon" style="-webkit-mask-image:url('no-fishing5.svg');mask-image:url('no-fishing5.svg');"></span> Illegal Fishing</h4>
       <!-- Documentation (commented out for now)
       <div class="material-item">
         <div class="material-info">
@@ -546,7 +554,7 @@
 
     <!-- Beach Cleaning -->
     <div class="module-section module-beach-cleaning">
-      <h4><img class="module-icon" src="binfill.svg" alt=""> Beach Cleaning</h4>
+      <h4><span class="module-icon" style="-webkit-mask-image:url('binfill.svg');mask-image:url('binfill.svg');"></span> Beach Cleaning</h4>
       <!-- Documentation (commented out for now)
       <div class="material-item">
         <div class="material-info">
@@ -567,7 +575,7 @@
 
     <!-- Beach Profiling -->
     <div class="module-section module-beach-profiling">
-      <h4><img class="module-icon" src="beachfill.svg" alt=""> Beach Profiling</h4>
+      <h4><span class="module-icon" style="-webkit-mask-image:url('beachfill.svg');mask-image:url('beachfill.svg');"></span> Beach Profiling</h4>
       <!-- Documentation (commented out for now)
       <div class="material-item">
         <div class="material-info">
@@ -588,7 +596,7 @@
 
     <!-- Seabirds -->
     <div class="module-section module-seabirds">
-      <h4><img class="module-icon" src="seagullfill.svg" alt=""> Seabirds</h4>
+      <h4><span class="module-icon" style="-webkit-mask-image:url('seagullfill.svg');mask-image:url('seagullfill.svg');"></span> Seabirds</h4>
       <!-- Documentation (commented out for now)
       <div class="material-item">
         <div class="material-info">
@@ -609,7 +617,7 @@
 
     <!-- S. Magpie Robins -->
     <div class="module-section module-smr">
-      <h4><img class="module-icon" src="birdfill.svg" alt=""> Seychelles Magpie Robin</h4>
+      <h4><span class="module-icon" style="-webkit-mask-image:url('birdfill.svg');mask-image:url('birdfill.svg');"></span> Seychelles Magpie Robin</h4>
       <!-- Documentation (commented out for now)
       <div class="material-item">
         <div class="material-info">
@@ -637,7 +645,7 @@
 
     <!-- Tortoises -->
     <div class="module-section module-tortoises">
-      <h4><img class="module-icon" src="tortoisefill.svg" alt=""> Tortoises</h4>
+      <h4><span class="module-icon" style="-webkit-mask-image:url('tortoisefill.svg');mask-image:url('tortoisefill.svg');"></span> Tortoises</h4>
       <!-- Documentation (commented out for now)
       <div class="material-item">
         <div class="material-info">
@@ -658,7 +666,7 @@
 
     <!-- Skink/Gecko Census -->
     <div class="module-section module-skink-census">
-      <h4><img class="module-icon" src="lizard-fill.svg" alt=""> Skink/Gecko Census</h4>
+      <h4><span class="module-icon" style="-webkit-mask-image:url('lizard-fill.svg');mask-image:url('lizard-fill.svg');"></span> Skink/Gecko Census</h4>
       <!-- Documentation (commented out for now)
       <div class="material-item">
         <div class="material-info">
@@ -679,7 +687,7 @@
 
     <!-- Invasives -->
     <div class="module-section module-invasives">
-      <h4><img class="module-icon" src="plantfill.svg" alt=""> Invasives</h4>
+      <h4><span class="module-icon" style="-webkit-mask-image:url('plantfill.svg');mask-image:url('plantfill.svg');"></span> Invasives</h4>
       <!-- Documentation (commented out for now)
       <div class="material-item">
         <div class="material-info">
@@ -700,7 +708,7 @@
 
     <!-- Invertebrates -->
     <div class="module-section module-invertebrates">
-      <h4><img class="module-icon" src="wormfill.svg" alt=""> Invertebrates</h4>
+      <h4><span class="module-icon" style="-webkit-mask-image:url('wormfill.svg');mask-image:url('wormfill.svg');"></span> Invertebrates</h4>
       <!-- Documentation (commented out for now)
       <div class="material-item">
         <div class="material-info">
@@ -721,7 +729,7 @@
 
     <!-- Miscellaneous -->
     <div class="module-section module-miscellaneous">
-      <h4><img class="module-icon" src="box2.svg" alt=""> Miscellaneous</h4>
+      <h4><span class="module-icon" style="-webkit-mask-image:url('box2.svg');mask-image:url('box2.svg');"></span> Miscellaneous</h4>
       <!-- Documentation (commented out for now)
       <div class="material-item">
         <div class="material-info">
