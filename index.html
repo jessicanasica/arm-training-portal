@@ -163,6 +163,31 @@
       border-radius: 8px;
       vertical-align: middle;
     }
+    /* "New" indicator for unwatched videos — coral accent, matching the Nature Seychelles
+       app family's shared badge convention (ARC app: --coral-accent: #DD633C) */
+    .coral-badge {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 2px 8px;
+      background: #DD633C;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 8px;
+      vertical-align: middle;
+    }
+    /* Grey badge for a title that's been added but has no real file linked yet */
+    .coming-soon-badge {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 2px 8px;
+      background: #e0e0e0;
+      color: #616161;
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 8px;
+      vertical-align: middle;
+    }
     .view-btn {
       display: inline-block;
       padding: 6px 18px;
@@ -297,6 +322,48 @@
       color: rgba(255,255,255,0.6);
       font-size: 12px;
     }
+
+    /* Video modal (in-page playback instead of downloading/navigating away) */
+    .video-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .video-modal.open {
+      display: flex;
+    }
+    .video-modal-content {
+      position: relative;
+      width: 100%;
+      max-width: 960px;
+    }
+    .video-modal-content video {
+      width: 100%;
+      max-height: 80vh;
+      border-radius: 10px;
+      background: #000;
+      display: block;
+    }
+    .video-modal-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 32px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 4px 8px;
+    }
+    .video-modal-close:hover {
+      color: #ccc;
+    }
   </style>
 </head>
 <body>
@@ -325,6 +392,7 @@
     <!-- Turtles -->
     <div class="module-section module-turtles">
       <h4>🐢 Turtles</h4>
+      <!-- Documentation (commented out for now)
       <div class="material-item">
         <div class="material-info">
           <span class="material-icon">📄</span>
@@ -332,10 +400,11 @@
         </div>
         <a href="#" class="view-btn">View</a>
       </div>
+      -->
       <div class="material-item">
         <div class="material-info">
           <span class="material-icon">🎬</span>
-          <span class="material-title">Turtle Patrol Walkthrough Video</span>
+          <span class="material-title">Turtle Patrol Walkthrough Video<span class="coming-soon-badge">Coming soon</span></span>
         </div>
         <a href="#" class="view-btn">View</a>
       </div>
@@ -344,6 +413,7 @@
     <!-- Illegal Fishing -->
     <div class="module-section module-illegal-fishing">
       <h4>🎣 Illegal Fishing</h4>
+      <!-- Documentation (commented out for now)
       <div class="material-item">
         <div class="material-info">
           <span class="material-icon">📄</span>
@@ -351,10 +421,11 @@
         </div>
         <a href="#" class="view-btn">View</a>
       </div>
+      -->
       <div class="material-item">
         <div class="material-info">
           <span class="material-icon">🎬</span>
-          <span class="material-title">Illegal Fishing Walkthrough Video</span>
+          <span class="material-title">Illegal Fishing Walkthrough Video<span class="coming-soon-badge">Coming soon</span></span>
         </div>
         <a href="#" class="view-btn">View</a>
       </div>
@@ -363,6 +434,7 @@
     <!-- Beach Cleaning -->
     <div class="module-section module-beach-cleaning">
       <h4>🧹 Beach Cleaning</h4>
+      <!-- Documentation (commented out for now)
       <div class="material-item">
         <div class="material-info">
           <span class="material-icon">📄</span>
@@ -370,10 +442,11 @@
         </div>
         <a href="#" class="view-btn">View</a>
       </div>
+      -->
       <div class="material-item">
         <div class="material-info">
           <span class="material-icon">🎬</span>
-          <span class="material-title">Beach Cleaning Walkthrough Video</span>
+          <span class="material-title">Beach Cleaning Walkthrough Video<span class="coming-soon-badge">Coming soon</span></span>
         </div>
         <a href="#" class="view-btn">View</a>
       </div>
@@ -382,6 +455,7 @@
     <!-- Beach Profiling -->
     <div class="module-section module-beach-profiling">
       <h4>🏖️ Beach Profiling</h4>
+      <!-- Documentation (commented out for now)
       <div class="material-item">
         <div class="material-info">
           <span class="material-icon">📄</span>
@@ -389,10 +463,11 @@
         </div>
         <a href="#" class="view-btn">View</a>
       </div>
+      -->
       <div class="material-item">
         <div class="material-info">
           <span class="material-icon">🎬</span>
-          <span class="material-title">Beach Profiling Walkthrough Video</span>
+          <span class="material-title">Beach Profiling Walkthrough Video<span class="coming-soon-badge">Coming soon</span></span>
         </div>
         <a href="#" class="view-btn">View</a>
       </div>
@@ -401,6 +476,7 @@
     <!-- Seabirds -->
     <div class="module-section module-seabirds">
       <h4>🐦 Seabirds</h4>
+      <!-- Documentation (commented out for now)
       <div class="material-item">
         <div class="material-info">
           <span class="material-icon">📄</span>
@@ -408,10 +484,11 @@
         </div>
         <a href="#" class="view-btn">View</a>
       </div>
+      -->
       <div class="material-item">
         <div class="material-info">
           <span class="material-icon">🎬</span>
-          <span class="material-title">Seabird Census Walkthrough Video</span>
+          <span class="material-title">Seabird Census Walkthrough Video<span class="coming-soon-badge">Coming soon</span></span>
         </div>
         <a href="#" class="view-btn">View</a>
       </div>
@@ -420,6 +497,7 @@
     <!-- S. Magpie Robins -->
     <div class="module-section module-smr">
       <h4>🐦‍⬛ S. Magpie Robins</h4>
+      <!-- Documentation (commented out for now)
       <div class="material-item">
         <div class="material-info">
           <span class="material-icon">📄</span>
@@ -427,10 +505,11 @@
         </div>
         <a href="#" class="view-btn">View</a>
       </div>
+      -->
       <div class="material-item">
         <div class="material-info">
           <span class="material-icon">🎬</span>
-          <span class="material-title">SMR Nest Walkthrough Video</span>
+          <span class="material-title">SMR Nest Walkthrough Video<span class="coming-soon-badge">Coming soon</span></span>
         </div>
         <a href="#" class="view-btn">View</a>
       </div>
@@ -439,6 +518,7 @@
     <!-- Tortoises -->
     <div class="module-section module-tortoises">
       <h4>🐢 Tortoises</h4>
+      <!-- Documentation (commented out for now)
       <div class="material-item">
         <div class="material-info">
           <span class="material-icon">📄</span>
@@ -446,10 +526,11 @@
         </div>
         <a href="#" class="view-btn">View</a>
       </div>
+      -->
       <div class="material-item">
         <div class="material-info">
           <span class="material-icon">🎬</span>
-          <span class="material-title">Tortoise Census/Translocation/Excavation Video</span>
+          <span class="material-title">Tortoise Census/Translocation/Excavation Video<span class="coming-soon-badge">Coming soon</span></span>
         </div>
         <a href="#" class="view-btn">View</a>
       </div>
@@ -458,6 +539,7 @@
     <!-- Skink/Gecko Census -->
     <div class="module-section module-skink-census">
       <h4>🦎 Skink/Gecko Census</h4>
+      <!-- Documentation (commented out for now)
       <div class="material-item">
         <div class="material-info">
           <span class="material-icon">📄</span>
@@ -465,10 +547,11 @@
         </div>
         <a href="#" class="view-btn">View</a>
       </div>
+      -->
       <div class="material-item">
         <div class="material-info">
           <span class="material-icon">🎬</span>
-          <span class="material-title">Skink/Gecko Census Walkthrough Video</span>
+          <span class="material-title">Skink/Gecko Census Walkthrough Video<span class="coming-soon-badge">Coming soon</span></span>
         </div>
         <a href="#" class="view-btn">View</a>
       </div>
@@ -477,6 +560,7 @@
     <!-- Invasives -->
     <div class="module-section module-invasives">
       <h4>🌿 Invasives</h4>
+      <!-- Documentation (commented out for now)
       <div class="material-item">
         <div class="material-info">
           <span class="material-icon">📄</span>
@@ -484,10 +568,11 @@
         </div>
         <a href="#" class="view-btn">View</a>
       </div>
+      -->
       <div class="material-item">
         <div class="material-info">
           <span class="material-icon">🎬</span>
-          <span class="material-title">Invasives Walkthrough Video</span>
+          <span class="material-title">Invasives Walkthrough Video<span class="coming-soon-badge">Coming soon</span></span>
         </div>
         <a href="#" class="view-btn">View</a>
       </div>
@@ -496,6 +581,7 @@
     <!-- Invertebrates -->
     <div class="module-section module-invertebrates">
       <h4>🐛 Invertebrates</h4>
+      <!-- Documentation (commented out for now)
       <div class="material-item">
         <div class="material-info">
           <span class="material-icon">📄</span>
@@ -503,10 +589,11 @@
         </div>
         <a href="#" class="view-btn">View</a>
       </div>
+      -->
       <div class="material-item">
         <div class="material-info">
           <span class="material-icon">🎬</span>
-          <span class="material-title">Invertebrates Walkthrough Video</span>
+          <span class="material-title">Invertebrates Walkthrough Video<span class="coming-soon-badge">Coming soon</span></span>
         </div>
         <a href="#" class="view-btn">View</a>
       </div>
@@ -515,6 +602,7 @@
     <!-- Miscellaneous -->
     <div class="module-section module-miscellaneous">
       <h4>📦 Miscellaneous</h4>
+      <!-- Documentation (commented out for now)
       <div class="material-item">
         <div class="material-info">
           <span class="material-icon">📄</span>
@@ -522,10 +610,11 @@
         </div>
         <a href="#" class="view-btn">View</a>
       </div>
+      -->
       <div class="material-item">
         <div class="material-info">
           <span class="material-icon">🎬</span>
-          <span class="material-title">Miscellaneous Walkthrough Video</span>
+          <span class="material-title">Miscellaneous Walkthrough Video<span class="coming-soon-badge">Coming soon</span></span>
         </div>
         <a href="#" class="view-btn">View</a>
       </div>
@@ -534,6 +623,7 @@
     <!-- Admin (admin only module: stats, daily log, reporting -- tabs regular users can't access) -->
     <div class="module-section module-admin" data-admin-only="true">
       <h4>🔒 Admin <span class="admin-badge">Admin only</span></h4>
+      <!-- Documentation (commented out for now)
       <div class="material-item">
         <div class="material-info">
           <span class="material-icon">📄</span>
@@ -541,6 +631,8 @@
         </div>
         <a href="#" class="view-btn">View</a>
       </div>
+      -->
+      <!-- Documentation (commented out for now)
       <div class="material-item">
         <div class="material-info">
           <span class="material-icon">📄</span>
@@ -548,6 +640,8 @@
         </div>
         <a href="#" class="view-btn">View</a>
       </div>
+      -->
+      <!-- Documentation (commented out for now)
       <div class="material-item">
         <div class="material-info">
           <span class="material-icon">📄</span>
@@ -555,11 +649,20 @@
         </div>
         <a href="#" class="view-btn">View</a>
       </div>
+      -->
     </div>
     <!-- TODO: replace placeholder "#" links above with real PDF/video URLs as materials are produced. To add a new item, copy a .material-item block and paste it inside the relevant .module-section (add data-admin-only="true" to restrict it to admins). -->
 
     <div class="footer">
       <p>&copy; 2026 ARM / Nature Seychelles - Cousin Island Special Reserve. All rights reserved.</p>
+    </div>
+  </div>
+
+  <!-- Video Modal (plays local video files in-page instead of downloading) -->
+  <div id="videoModal" class="video-modal" onclick="if (event.target === this) closeVideoModal();">
+    <div class="video-modal-content">
+      <button class="video-modal-close" onclick="closeVideoModal()" aria-label="Close">&times;</button>
+      <video id="videoPlayer" controls></video>
     </div>
   </div>
 
@@ -590,6 +693,48 @@
       });
     }
 
+    // "New" coral badge tracking — persists (localStorage, not sessionStorage) across visits
+    // so a video's badge disappears permanently once opened, not just for the current session.
+    const WATCHED_KEY_PREFIX = 'arm_training_watched_';
+
+    function markVideoWatched(src) {
+      localStorage.setItem(WATCHED_KEY_PREFIX + src, '1');
+      document.querySelectorAll(`.coral-badge[data-video="${src}"]`).forEach(badge => {
+        badge.style.display = 'none';
+      });
+    }
+
+    function applyWatchedBadges() {
+      document.querySelectorAll('.coral-badge[data-video]').forEach(badge => {
+        const src = badge.getAttribute('data-video');
+        if (localStorage.getItem(WATCHED_KEY_PREFIX + src)) {
+          badge.style.display = 'none';
+        }
+      });
+    }
+
+    function openVideoModal(src) {
+      const modal = document.getElementById('videoModal');
+      const player = document.getElementById('videoPlayer');
+      player.src = src;
+      modal.classList.add('open');
+      player.play();
+      markVideoWatched(src);
+    }
+
+    function closeVideoModal() {
+      const modal = document.getElementById('videoModal');
+      const player = document.getElementById('videoPlayer');
+      player.pause();
+      player.removeAttribute('src');
+      player.load();
+      modal.classList.remove('open');
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeVideoModal();
+    });
+
     async function checkPassword() {
       const input = document.getElementById('passwordInput').value;
       const hash = await sha256(input);
@@ -605,6 +750,7 @@
         document.getElementById('passwordScreen').style.display = 'none';
         document.getElementById('trainingScreen').style.display = 'block';
         applyRole(role);
+        applyWatchedBadges();
         updateBackground();
       } else {
         document.getElementById('errorMsg').style.display = 'block';
@@ -627,6 +773,7 @@
       document.getElementById('passwordScreen').style.display = 'none';
       document.getElementById('trainingScreen').style.display = 'block';
       applyRole(savedRole);
+      applyWatchedBadges();
     }
     updateBackground();
   </script>
